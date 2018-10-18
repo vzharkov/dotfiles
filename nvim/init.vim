@@ -40,8 +40,9 @@ set background = "dark"
 "Call the theme one
 "
 let base16colorspace=256
-colorscheme base16-default-dark
+colorscheme jellybeans
 set guifont=DejaVu\ Sans\ Mono\ 10
+set guicursor=
 set linespace=2
 set visualbell
 
@@ -82,3 +83,15 @@ endif
 
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
+
+let g:ale_linters = {
+      \   'markdown': [],
+      \   'javascript': ['eslint', 'flow'],
+      \   'ruby': ['rubocop'],
+      \}
+let g:ale_fixers = {
+      \ 'javascript': ['eslint'],
+      \ 'ruby': ['rubocop'],
+      \ 'elixir': ['mix_format'],
+\ }
+
