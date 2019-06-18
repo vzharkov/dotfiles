@@ -13,6 +13,15 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'othree/html5.vim'
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'leafgarland/typescript-vim'
+
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" Utils
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'w0rp/ale'
 

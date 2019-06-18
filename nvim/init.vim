@@ -52,6 +52,9 @@ let mapleader="\<Space>"
 " ESC map
 inoremap jj <Esc>
 
+" ALE
+nmap <Leader>e :ALEFix<CR>
+
 " FZF
 nmap ; :Buffers<CR>
 nmap <Leader>t :Files<CR>
@@ -60,11 +63,24 @@ nmap <Leader>r :Tags<CR>
 "NerdTree
 map <C-n> :NERDTreeToggle<CR>
 
-""NerdTree move map
+" Move into window or create new one
 map <silent> <C-h> :call WinMove('h')<CR>
 map <silent> <C-j> :call WinMove('j')<CR>
 map <silent> <C-k> :call WinMove('k')<CR>
 map <silent> <C-l> :call WinMove('l')<CR>
+
+function! WinMove(key)
+  let t:curwin = winnr()
+  exec "wincmd ".a:key
+    if (t:curwin == winnr())
+      if (match(a:key,'[jk]'))
+        wincmd v
+      else
+        wincmd s
+      endif
+   exec "wincmd ".a:key
+  endif
+endfunction
 
 "Ag search
 let g:ackprg = 'ag --vimgrep'
@@ -81,8 +97,18 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" bind K to grep word under cursor
+nnoremap K :silent grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
+
+
+" Auto-pairs
+let g:AutoPairsFlyMode = 0
+
+" typescript
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 
 let g:ale_linters = {
       \   'markdown': [],
